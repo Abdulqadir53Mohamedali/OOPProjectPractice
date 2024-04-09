@@ -37,6 +37,13 @@ const dateRangePicker = flatpickr(range1, {
 			input: range2,
 		}),
 	],
+	onChange: function(selectedDates, dateStr, instance) {
+        // When a date is selected, update the hidden fields with the formatted dates
+        const formattedStartDate = selectedDates[0] ? selectedDates[0].toISOString().substring(0, 10) : '';
+        const formattedEndDate = selectedDates[1] ? selectedDates[1].toISOString().substring(0, 10) : '';
+		document.getElementById('hiddenStartDate').value = formattedStartDate;
+		document.getElementById('hiddenEndDate').value = formattedEndDate;
+    },
 });
 
 // The range1 and range2 act as elements , they are put in seperate inputs in my html form 

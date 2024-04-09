@@ -46,14 +46,35 @@ class hotel extends database
 
     }
 
-    public function roomDisplay($floorNumber){
-        $stmt = $this->connect()->prepare("SELECT MIN(roomID) AS roomID , roomType , RoomDescription , price , floor,roomImage
-            FROM rooms 
-            WHERE floor = ?
-            GROUP BY roomType , floor
-        ");
-        $stmt->execute([$floorNumber]); 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // public function roomDisplay($floorNumber){
+    //     $stmt = $this->connect()->prepare("SELECT MIN(roomID) AS roomID , roomType , RoomDescription , price , floor,roomImage
+    //         FROM rooms 
+    //         WHERE floor = ?
+    //         GROUP BY roomType , floor
+    //     ");
+    //     $stmt->execute([$floorNumber]); 
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    public function roomDisplay($floorNumber) {
+        // This query selects the lowest roomID that is not currently booked for each room type on the given floor.
+        $sql_query = "
+            SELECT r.roomID, r.roomType, r.RoomDescription, r.price, r.floor, r.roomImage 
+            FROM rooms r
+            WHERE r.floor = ? AND r.roomID NOT IN (
+                SELECT roomID FROM hotel
+            )
+            GROUP BY r.roomType
+            ORDER BY r.roomID ASC
+        ";
+    
+        $stmtRooms = $this->connect()->prepare($sql_query);
+        $stmtRooms->execute([$floorNumber]);
+        return $stmtRooms->fetchAll(PDO::FETCH_ASSOC);
+
+        // r is used as an alias for rooms. So instead of writing rooms.roomID, rooms.roomType, etc., 
+            //you can just write r.roomID, r.roomType, etc. This is particularly useful in complex queries with 
+            //multiple tables and joins, as it helps avoid confusion about which columns come from which tables.
     }
 
     public function bookingValidation(){
@@ -67,6 +88,24 @@ class hotel extends database
         $stmt = $this->connect()->prepare($sql_query);
         $stmt->execute([$roomID]);
         return $stmt->fetch();
+    }
+
+    public function userIdFetch($email)
+    {
+        // $sessionFetch = $_SESSION['email'];
+        $sql_query = "SELECT UserID FROM user WHERE Email = ?";
+        $stmt = $this->connect()->prepare($sql_query);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user ? $user['UserID'] : null;
+    }
+
+    public function sendBookingInfo($roomId, $userId, $startDate, $endDate)
+    {
+        $sql_query = "INSERT INTO hotel(userID,roomID,startDate,endDate) VALUES(?,?,?,?)";
+        $stmt = $this->connect()->prepare( $sql_query );
+        $stmt->execute([$userId,$roomId,$startDate,$endDate]);
+
     }
 
 

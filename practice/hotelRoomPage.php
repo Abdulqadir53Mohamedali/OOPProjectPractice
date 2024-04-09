@@ -54,8 +54,8 @@ $endDate = $_POST['endDate'];
                         <p class = "fs-3" >Can house 2 adults and 1 child</p>
                         <p name="roomPrice" class ="fs-3"><b>Price: £<?php echo htmlspecialchars(number_format($chosenRoom['price'], 2)); ?></b></p>
                         <input type="hidden" name="roomID" value="<?php echo $chosenRoom['roomID']; ?>">
-                        <input type='hidden' name='startDate' value='<?= $startDate ?>'>
-                        <input type='hidden' name='endDate' value='<?= $endDate ?>'>
+                        <input type='hidden' name='startDate' value='<?php echo $startDate ?>'>
+                        <input type='hidden' name='endDate' value='<?php echo $endDate ?>'>
                         <button name = "submitBtn"type = "submit" class = "btn btn-primary mt-5">Book room</button>
                     </div>
                 </div>

@@ -1,14 +1,27 @@
+<?php require "navbar.php"?>
 <?php
+
 require_once("..//classes/hotelClass.php");
 
 
 $hotel = new hotel();
 
 $chosenRoom = null;
+
+$email = $_SESSION['email'] ?? null; 
+$userId = $hotel->userIdFetch($email);
+
+
 if(isset($_POST["roomID"])){
     $chosenRoom = $hotel->chosenRoom($_POST["roomID"]);
     $startDate = $_POST['startDate'] ;
     $endDate = $_POST['endDate'] ;
+    $roomID = $_POST["roomID"];
+}
+if (isset($_POST["ConfirmPaymentBtn"])) {
+    var_dump($_POST['roomId'], $userId, $_POST['startDate'], $_POST['endDate']);
+    $hotel->sendBookingInfo($_POST['roomId'] ?? '', $_POST['userId'] ?? '', $_POST['startDate'] ?? '', $_POST['endDate'] ?? '');
+    header("Location:hotel.php");
 }
 
 ?>
@@ -25,28 +38,32 @@ if(isset($_POST["roomID"])){
 
 </head>
 <body>
-    <?php require "navbar.php"?>
 
     <h2 name="roomName" class="text-center">Hotel Room</h2>
     <hr class="border">
 
-    <div class = "container">
-    <h2>Payment</h2>
-        <div class = "row">
-            <div class = "col-lg-8">
-                <div class="card mb-4">
-                    <div class="card-body">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+        <div class="container">
+            <h2>Payment</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
                             <h5 class="card-title"><u>Booking Information</u></h5>
-                                <p class="card-text">Room Type <br> <?php echo $chosenRoom['roomType']  ?></p>
-                                <p class = "card-text">Floor <br> <?php echo $chosenRoom['floor']?></p>
-                                <p class = "card-text">Booking Dates <br> <?php echo $startDate?> - <?php echo $endDate?></p>
-                                <p class = "card-text"> Booking Time </p>
-                            <h5 class = "card-title"> <u>Booking Cost</u></h5>
-                                <p>Price: <br> £<?php   echo  $chosenRoom['price']?></p>
+                            <p class="card-text">Room Type <br> <?php echo $chosenRoom['roomType']  ?></p>
+                            <p class="card-text">Floor <br> <?php echo $chosenRoom['floor'] ?></p>
+                            <p class="card-text">Booking Dates <br> <?php echo $startDate ?> - <?php echo $endDate ?></p>
+                            <p class="card-text"> Booking Time </p>
+                            <h5 class="card-title"> <u>Booking Cost</u></h5>
+                            <p>Price: <br> £<?php echo  $chosenRoom['price'] ?></p>
+                            <input name="userId" type="hidden" value="<?php echo $userId ?>">
+                            <input name="roomId" type="hidden" value="<?php echo $roomID ?>">
+                            <input name="startDate" type="hidden" value="<?php echo $startDate; ?>">
+                            <input name="endDate" type="hidden" value="<?php echo $endDate; ?>">
+                        </div>
                     </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-body">
+                    <div class="card mb-4">
+                        <div class="card-body">
                             <h5 class="card-title">1. Credit Card</h5>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">Card number</label>
@@ -64,32 +81,33 @@ if(isset($_POST["roomID"])){
                                 <label for="formGroupExampleInput2" class="form-label">CVV code</label>
                                 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g.961">
                             </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
                             <h5 class="card-title">2. Paypal</h5>
                             <!-- Paypal icon -->
+                        </div>
                     </div>
-                </div>
 
 
-            </div>
-            <div class = "col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Order Summary</h5>
-                    <p class="card-text">Subtotal</p>
-                    <p class="card-text">Discount</p>
-                    <hr>
-                    <p class="card-text">Total</p>
-                    <a href="#" name = "submitPaymentBtn"class="btn btn-primary">Confirm Payment</a>
                 </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Summary</h5>
+                            <p class="card-text">Subtotal</p>
+                            <p class="card-text">Discount</p>
+                            <hr>
+                            <p class="card-text">Total</p>
+                            <button type="submit" name="ConfirmPaymentBtn" class="btn btn-primary">Confirm Payment</button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </form>
 
 
 

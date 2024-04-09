@@ -39,10 +39,16 @@ if(isset($_POST['roomBtn'])){
             <!-- Start date  input -->
             <h3>Choose a time for your booking:</h3><br>
             <label for="dateRange1">From:</label>
-            <input type="text" id="dateRange1" name="startDate" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
+            <input type="text" id="dateRange1" name="displayStartDate" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
             <!-- End date input -->
             <label for="dateRange2">To:</label>
-            <input type="text" id="dateRange2" name="endDate" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
+            <input type="text" id="dateRange2" name="displayEndDate" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
+            
+
+                <!-- These hidden fields will hold the dates in the format your backend expects -->
+            <input type='hidden' id='hiddenStartDate' name='startDate' value=''>
+            <input type='hidden' id='hiddenEndDate' name='endDate' value=''>
+
             <button type="button" class="btn btn-light" id="dateRangeClear">Clear</button>
             <button type="submit" class="btn btn-success" name="dateSubmit">Submit</button>
         </form>
@@ -58,6 +64,8 @@ if(isset($_POST['roomBtn'])){
             <?php
             // Create a new hotel object
             $hotel = new hotel();
+            $startDate = $_POST['startDate'];
+            $endDate =$_POST['endDate'];
 
             // Loop through the floors and display rooms
             for ($floor = 1; $floor <= 5; $floor++) :
@@ -76,8 +84,8 @@ if(isset($_POST['roomBtn'])){
                                         <p class='card-text'><?= htmlspecialchars($room['RoomDescription']) ?></p>
                                         <p class='card-text'>Price: £<?= htmlspecialchars($room['price']) ?></p>
                                         <input type='hidden' name='roomID' value='<?= htmlspecialchars($room['roomID']) ?>'>
-                                        <input type='hidden' name='startDate' value='<?= $_POST['startDate'] ?? null; ?>'>
-                                        <input type='hidden' name='endDate' value='<?= $_POST['endDate'] ?? null; ?>'>
+                                        <input type='hidden' name='startDate' value='<?php echo $startDate ?? null; ?>'>
+                                        <input type='hidden' name='endDate' value='<?php echo  $endDate ?? null; ?>'>
                                         <button name='roomBtn' type='submit' class='btn btn-primary'>View Room</button>
                                     </div>
                                 </div>
