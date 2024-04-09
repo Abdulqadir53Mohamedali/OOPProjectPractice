@@ -11,7 +11,8 @@
     <script src="/scripts/hotelLandingPage.js"></script>
 </head>
 <body>
-    <?php require_once "navbar.php" ?>
+<?php require_once "navbar.php" ?>
+ 
 
     <!-- Landing page details -->
 

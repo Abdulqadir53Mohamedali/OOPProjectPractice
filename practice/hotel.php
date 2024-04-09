@@ -31,7 +31,7 @@ if(isset($_POST['roomBtn'])){
     <link rel="stylesheet" href = "/styles/hoteBookingPage.css">
 </head>
 <body>
-    <?php require_once "navbar.php" ?>
+    <?php require_once "navbar.php";?>
     <main class="container mt-5">
         <!-- Date sekect form -->
         <form method="POST">

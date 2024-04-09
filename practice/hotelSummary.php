@@ -1,5 +1,6 @@
-<?php require "navbar.php"?>
+
 <?php
+require "navbarhotelsummary.php";
 
 require_once("..//classes/hotelClass.php");
 
@@ -38,6 +39,7 @@ if (isset($_POST["ConfirmPaymentBtn"])) {
 
 </head>
 <body>
+
 
     <h2 name="roomName" class="text-center">Hotel Room</h2>
     <hr class="border">
