@@ -24,6 +24,7 @@
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
+            <!-- dont put careseoul in container -->
             <div class="carousel-inner  container col-12 col-sm-8 col-md-5  col-lg-4  col-xl-3 ">
                 <div class="carousel-item active" data-bs-interval="10000">
                     <img src="/images/firstHotelImage.jpg" class=" img-fluid w-100" alt="...">

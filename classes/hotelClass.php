@@ -46,16 +46,6 @@ class hotel extends database
 
     }
 
-    // public function roomDisplay($floorNumber){
-    //     $stmt = $this->connect()->prepare("SELECT MIN(roomID) AS roomID , roomType , RoomDescription , price , floor,roomImage
-    //         FROM rooms 
-    //         WHERE floor = ?
-    //         GROUP BY roomType , floor
-    //     ");
-    //     $stmt->execute([$floorNumber]); 
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
     public function roomDisplay($floorNumber) {
         // This query selects the lowest roomID that is not currently booked for each room type on the given floor.
         $sql_query = "
@@ -102,13 +92,14 @@ class hotel extends database
 
     public function sendBookingInfo($roomId, $userId, $startDate, $endDate)
     {
-        $sql_query = "INSERT INTO hotel(userID,roomID,startDate,endDate) VALUES(?,?,?,?)";
+        $sql_query = "INSERT INTO hotel(userID,roomID,startDate,endDate,status) VALUES(?,?,?,?,'active')";
         $stmt = $this->connect()->prepare( $sql_query );
         $stmt->execute([$userId,$roomId,$startDate,$endDate]);
 
     }
 
 
+    
 
 
 
@@ -134,13 +125,60 @@ class hotel extends database
     // If we have time then add a filter system allowing user to selects dates and then room types
     // if we have more time then add filtering via price
 
+        // public function roomDisplay($floorNumber) {
+        //     
+        //     $this->updateExpiredBookings();
 
 
+        //     $sql_query = "
+        //         SELECT r.roomID, r.roomType, r.RoomDescription, r.price, r.floor, r.roomImage 
+        //         FROM rooms r
+        //         WHERE r.floor = ? AND r.roomID NOT IN (
+        //             SELECT roomID FROM hotel_booking WHERE status = 'active'
+        //         )
+        //         GROUP BY r.roomType
+        //         ORDER BY r.roomID ASC
+        //     ";
+        
+        //     $stmtRooms = $this->connect()->prepare($sql_query);
+        //     $stmtRooms->execute([$floorNumber]);
+        //     return $stmtRooms->fetchAll(PDO::FETCH_ASSOC);
+        // }
 
+    // private function updateExpiredBookings() {
+    //
+    //     $sql = "UPDATE hotel SET status = 'expired' WHERE endDate < CURDATE() AND status = 'active'";
+    
+    //     
+    //     $stmt = $this->connect()->prepare($sql);
+    //     $result = $stmt->execute();
+    
+    //     if ($result) {
+    //         echo "Bookings updated successfully.";
+    //     } else {
+    //         echo "An error occurred.";
+    //     }
+    // }
 
-
-
-
-
-
+        // public function getEarliestAvailableDate($roomType, $floorNumber) {
+    //     // If there are no available rooms, find the earliest end date
+    //     $earliestDateQuery = "
+    //         SELECT MIN(endDate) as earliestEndDate
+    //         FROM hotel h
+    //         INNER JOIN rooms r ON h.roomID = r.roomID
+    //         WHERE h.status = 'active' AND r.roomType = ? AND r.floor = ?
+    //     ";
+    
+    //     $stmtEarliestDate = $this->connect()->prepare($earliestDateQuery);
+    //     $stmtEarliestDate->execute([$roomType, $floorNumber]);
+    //     $earliestDateResult = $stmtEarliestDate->fetch(PDO::FETCH_ASSOC);
+    
+    //     // If there is an active booking, return the earliest end date
+    //     if ($earliestDateResult && $earliestDateResult['earliestEndDate']) {
+    //         return $earliestDateResult['earliestEndDate'];
+    //     }
+    
+    //     // If there are no active bookings, this implies rooms are immediately available
+    //     return "Rooms are immediately available";
+    // }
 ?>
