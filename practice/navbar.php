@@ -24,7 +24,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a style= "color:#471F3A; font-size: 18px; font-weight: 500;"id = "tickets" class=" mx-3 nav-link" href="#">Zoo tickets</a>
+          <a style= "color:#471F3A; font-size: 18px; font-weight: 500;"id = "tickets" class=" mx-3 nav-link" href="/practice/ticket.php">Zoo tickets</a>
         </li>
         <li class="nav-item">
           <a style= "color:#471F3A; font-size: 18px; font-weight: 500;"id = "hotel" class=" mx-3 nav-link" href="/practice/hotelLandingPage.php">Hotel</a>
@@ -47,7 +47,7 @@
 
             <?php if (!empty($_SESSION['user_logged_in'])){?>
               <li><a class="dropdown-item" href="/classes/logout.php">Logout</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="/practice/settings.php">Settings</a></li>
             <?php } ?>
           </ul>
         </li>

@@ -60,41 +60,44 @@ if(isset($_POST['roomBtn'])){
 
 
     <?php if(isset($_POST['dateSubmit']) && !empty($_POST['startDate']) && !empty($_POST['endDate'])){?>
-        <div id ="roomDisplayContainer" class="container border text-center ">
-            <?php
-            // Create a new hotel object
-            $hotel = new hotel();
-            $startDate = $_POST['startDate'];
-            $endDate =$_POST['endDate'];
+        <div id="roomDisplayContainer" class="container border text-center">
+    <?php
+    $hotel = new hotel();
+    $startDate = $_POST['startDate'] ?? null;
+    $endDate = $_POST['endDate'] ?? null;
 
-            // Loop through the floors and display rooms
-            for ($floor = 1; $floor <= 5; $floor++) :
-                $rooms = $hotel->roomDisplay($floor);?> 
-                <div id='F<?= $floor ?>' class=''>
-                <h1>Floor <?= $floor ?></h1>
-                <div class = "row justify-content-center">
-                    <?php foreach ($rooms as $room): ?>
-                        <!-- Output each room as a Bootstrap card -->
-                        <div  class = "col-md-3 mb-4">
-                            <form action = "hotelRoomPage.php" method = 'POST'>
-                                <div class='card' style='width: 18rem; display: inline-block; margin: 10px;'>
-                                    <img src='<?= htmlspecialchars($room['roomImage']) ?>' class='card-img-top' alt='Image of <?= htmlspecialchars($room['roomType']) ?>'>
-                                    <div class='card-body'>
-                                        <h5 class='card-title'><?= htmlspecialchars($room['roomType']) ?></h5>
-                                        <p class='card-text'><?= htmlspecialchars($room['RoomDescription']) ?></p>
-                                        <p class='card-text'>Price: £<?= htmlspecialchars($room['price']) ?></p>
-                                        <input type='hidden' name='roomID' value='<?= htmlspecialchars($room['roomID']) ?>'>
-                                        <input type='hidden' name='startDate' value='<?php echo $startDate ?? null; ?>'>
-                                        <input type='hidden' name='endDate' value='<?php echo  $endDate ?? null; ?>'>
+    for ($floor = 1; $floor <= 5; $floor++):
+        $rooms = $hotel->roomDisplay($floor);
+    ?>
+        <div id='F<?= $floor ?>' class=''>
+            <h1>Floor <?= $floor ?></h1>
+            <div class="row justify-content-center">
+                <?php foreach ($rooms as $room): ?>
+                    <div class='col-md-3 mb-4'>
+                        <form action='hotelRoomPage.php' method='POST'>
+                            <div class='card' style='width: 18rem; margin: 10px;'>
+                                <img src='<?= htmlspecialchars($room['roomImage']) ?>' class='card-img-top' alt='Image of <?= htmlspecialchars($room['roomType']) ?>'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'><?= htmlspecialchars($room['roomType']) ?></h5>
+                                    <p class='card-text'><?= htmlspecialchars($room['RoomDescription']) ?></p>
+                                    <p class='card-text'>Price: £<?= htmlspecialchars($room['price']) ?></p>
+                                    <?php if ($room['isBookable']): ?>
+                                        <input type='hidden' name='roomID' value='<?= htmlspecialchars($room['nextAvailableRoomID']) ?>'>
+                                        <input type='hidden' name='startDate' value='<?= htmlspecialchars($startDate) ?>'>
+                                        <input type='hidden' name='endDate' value='<?= htmlspecialchars($endDate) ?>'>
                                         <button name='roomBtn' type='submit' class='btn btn-primary'>View Room</button>
-                                    </div>
+                                    <?php else: ?>
+                                        <p class='text-warning'>Next available: <?= htmlspecialchars($room['earliestAvailableDate']) ?></p>
+                                    <?php endif; ?>
                                 </div>
-                            </form>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endfor ?>
+                            </div>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
+    <?php endfor; ?>
+</div>
     <?php }?>
 
 

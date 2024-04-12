@@ -21,6 +21,7 @@ if(isset($_POST["roomID"])){
 }
 if (isset($_POST["ConfirmPaymentBtn"])) {
     var_dump($_POST['roomId'], $userId, $_POST['startDate'], $_POST['endDate']);
+    
     $hotel->sendBookingInfo($_POST['roomId'] ?? '', $_POST['userId'] ?? '', $_POST['startDate'] ?? '', $_POST['endDate'] ?? '');
     header("Location:hotel.php");
 }
@@ -69,19 +70,19 @@ if (isset($_POST["ConfirmPaymentBtn"])) {
                             <h5 class="card-title">1. Credit Card</h5>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">Card number</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. 1234567891234567">
+                                <input  name = "CardNumber" type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. 1234567891234567">
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Name on card</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g. Silvers Reileigh">
+                                <input name = "cardholderName" type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g. Silvers Reileigh">
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">Expiry date</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="MM/YY">
+                                <input name = "ep" type="text" class="form-control" id="formGroupExampleInput" placeholder="MM/YY">
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">CVV code</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g.961">
+                                <input  name = "cvv"type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g.961">
                             </div>
                         </div>
                     </div>
@@ -101,7 +102,7 @@ if (isset($_POST["ConfirmPaymentBtn"])) {
                             <p class="card-text">Subtotal</p>
                             <p class="card-text">Discount</p>
                             <hr>
-                            <p class="card-text">Total</p>
+                            <p class="card-text">Total : <?php echo $chosenRoom['price']  ?></p>
                             <button type="submit" name="ConfirmPaymentBtn" class="btn btn-primary">Confirm Payment</button>
 
                         </div>
