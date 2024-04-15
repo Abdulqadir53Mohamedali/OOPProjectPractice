@@ -9,6 +9,7 @@ if(isset($_POST['submitBtn'])){
     $register = new register($_POST['email'],$_POST['password'],$_POST['confirmPassword'],$_POST['lastName'],$_POST['firstName'],$TC);
     $formValidation = $register;    
     $validationResult = $formValidation->validation();
+    // do var dump here
 } else{
     $register = new register('', '', '', '', '', '');
     $formValidation = $register;

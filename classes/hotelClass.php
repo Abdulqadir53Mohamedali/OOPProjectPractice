@@ -38,19 +38,6 @@ class hotel extends database
 
     }
 
-    private function Booking(){
-
-
-
-
-
-    }
-
-
-    //     // r is used as an alias for rooms. So instead of writing rooms.roomID, rooms.roomType, etc., 
-    //         //you can just write r.roomID, r.roomType, etc. This is particularly useful in complex queries with 
-    //         //multiple tables and joins, as it helps avoid confusion about which columns come from which tables.
-
     public function bookingValidation(){
 
         // validation for payment detials input
@@ -82,15 +69,8 @@ class hotel extends database
 
     }
 
-
-
-
-
     public function roomDisplay($floorNumber) {
             
-        // $this->updateExpiredBookings();
-
-
          $sql_query = "
             SELECT r.roomID, r.roomType, r.RoomDescription, r.price, r.floor, r.roomImage 
             FROM rooms r
@@ -151,77 +131,3 @@ class hotel extends database
 // EXTRAS
     // If we have time then add a filter system allowing user to selects dates and then room types
     // if we have more time then add filtering via price
-
-    // public function roomDisplay($floorNumber) {
-    //     // First, update any expired bookings.
-    //     $this->updateExpiredBookings();
-    
-    //     // Fetch the rooms on the specified floor, with an indication of the next available room ID
-    //     $sql_query = "
-    //         SELECT r.roomType, r.RoomDescription, r.price, r.floor, r.roomImage, 
-            
-    //                MIN(CASE WHEN h.status IS NULL THEN r.roomID ELSE NULL END) AS nextAvailableRoomID
-    //         FROM rooms r
-    //         LEFT JOIN hotel h ON r.roomID = h.roomID AND h.status = 'active'
-    //         WHERE r.floor = ?
-    //         GROUP BY r.roomType, r.RoomDescription, r.price, r.floor, r.roomImage
-    //         ORDER BY r.roomID
-    //     ";
-    
-    //     $stmtRooms = $this->connect()->prepare($sql_query);
-    //     $stmtRooms->execute([$floorNumber]);
-    //     $rooms = $stmtRooms->fetchAll(PDO::FETCH_ASSOC);
-    
-    //     // Check for availability and get the earliest available date if needed
-    //     foreach ($rooms as $key => $room) {
-    //         if ($room['nextAvailableRoomID'] === null) {
-    //             // No available room ID, meaning all are booked; fetch earliest date.
-    //             $earliestAvailableDate = $this->getEarliestAvailableDate($room['roomType'], $floorNumber);
-    //             $rooms[$key]['isBookable'] = false;
-    //             $rooms[$key]['earliestAvailableDate'] = $earliestAvailableDate;
-    //         } else {
-    //             // Available room ID exists.
-    //             $rooms[$key]['isBookable'] = true;
-    //             $rooms[$key]['earliestAvailableDate'] = null;
-    //         }
-    //     }
-    
-    //     return $rooms;
-    // }
-
-    //     private function updateExpiredBookings() {
-    
-    //         $sql = "UPDATE hotel SET status = 'expired' WHERE endDate < CURDATE() AND status = 'active'";
-        
-            
-    //         $stmt = $this->connect()->prepare($sql);
-    //         $result = $stmt->execute();
-        
-    //         if ($result) {
-    //             echo "Bookings updated successfully.";
-    //         } else {
-    //             echo "An error occurred.";
-    //         }
-    //     }
-
-    //     public function getEarliestAvailableDate($roomType, $floorNumber) {
-    //     // If there are no available rooms, find the earliest end date
-    //     $earliestDateQuery = "
-    //         SELECT MIN(endDate) as earliestEndDate
-    //         FROM hotel h
-    //         INNER JOIN rooms r ON h.roomID = r.roomID
-    //         WHERE h.status = 'active' AND r.roomType = ? AND r.floor = ?
-    //     ";
-    
-    //     $stmtEarliestDate = $this->connect()->prepare($earliestDateQuery);
-    //     $stmtEarliestDate->execute([$roomType, $floorNumber]);
-    //     $earliestDateResult = $stmtEarliestDate->fetch(PDO::FETCH_ASSOC);
-    
-    //     // If there is an active booking, return the earliest end date
-    //     if ($earliestDateResult && $earliestDateResult['earliestEndDate']) {
-    //         return $earliestDateResult['earliestEndDate'];
-    //     }
-    
-    //     // If there are no active bookings, this implies rooms are immediately available
-    //     return "Rooms are immediately available";
-    // }
