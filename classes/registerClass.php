@@ -32,7 +32,7 @@ class register extends database {
         return $result->rowCount() > 0;
     }
 
-    private function registration() {
+    public function registration() {
         $passwordHash = password_hash($this->passwrd, PASSWORD_DEFAULT);
         $sql_query = "INSERT INTO  user(Email,Passwrd,firstName,lastName) VALUES(?,?,?,?)";
         $stmt = $this->connect()->prepare($sql_query);
@@ -50,6 +50,7 @@ class register extends database {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL) || empty($this->email) || $this->emailCheck()) {
             $errors["email"] = "Invalid email or email already exists";
         }
+        // potnetially move email check otuside this 
         if (
             strlen($this->passwrd) < $MinimumPasswordlength ||
             !ctype_alnum($this->passwrd) ||
@@ -73,11 +74,7 @@ class register extends database {
             $errors["TC"] = "*required*";
         }
 
-        if (empty($errors)) {
-            $this->registration();
-            header("location:login.php");
-            exit();
-        }
+
 
         return ['errors' => $errors];
     }
@@ -96,5 +93,6 @@ class register extends database {
         echo isset($_POST[$type]) ? $_POST[$type] : '';
     }
 }
+
 
 ?>

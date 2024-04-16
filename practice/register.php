@@ -4,6 +4,21 @@ include_once "../classes/registerClass.php";
 $errorResults = ['errors'=> []];  // array to store error messages
 $validationResult = null;
 
+
+// potneitla reaosns ofr form erros 
+
+// before incldue do 
+    // error_reporting(E_ALL) and ini_set('dsiplay_errors',1)
+
+// do var_dump($_POST) before button isset
+//  not putitng exit after header stuff 
+// not making sure the for  attribute in label is identicla to id and name in input
+// $POST = array() // should clear the psot aray when before submission // clear only if corretc
+// potentially change the empty erros stuff 
+// chekc method and action stuff 
+// check post inputs
+// potentially get rid of the vlaue stuff for password and confirmpassowrd 
+    // nto good idea ot keep tetxt there 
 if(isset($_POST['submitBtn'])){
     $TC = isset($_POST['TC']) ? $_POST['TC'] : '';
     $register = new register($_POST['email'],$_POST['password'],$_POST['confirmPassword'],$_POST['lastName'],$_POST['firstName'],$TC);
@@ -15,7 +30,22 @@ if(isset($_POST['submitBtn'])){
     $formValidation = $register;
 }
 ?>
+<?php
 
+    $registerone = new register($_POST['email'] ?? '',$_POST['password'] ?? '',$_POST['confirmPassword'] ?? '',$_POST['lastName']?? '',$_POST['firstName'] ?? '');
+
+    if(isset($_POST['submitBtn'])){
+        $formValidation = $registerone->validation();
+        if (empty($errors)) {
+            $registerone->registration();
+            header("location:login.php");
+            exit();
+
+        }
+
+    }
+
+?>
 
 
 <!DOCTYPE html>
@@ -190,14 +220,7 @@ if(isset($_POST['submitBtn'])){
 </body>
 </html>
 
-<!-- 
- 1. Will use form from bootsrapp for the base layout 
- 2. will esnure buttons are made fro register, google account,already signed in , facebook etc
- 3. a checkbox fro the T&C and privacy policy page stuff in which we will sue the model 
-    element from bootsrap to display it if the user clicks on the T&C wording 
 
-
- -->
 
 
 

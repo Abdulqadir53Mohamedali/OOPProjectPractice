@@ -21,6 +21,9 @@ if(isset($_POST['ticketBtn'])){
 </head>
 <body>
     <?php require "../practice/navbar.php"; ?>
+    <h1 class="text-center">Zoo Ticket</h1>
+    <hr>
+    <div class="container row mx-auto">
     <form action="ticketSelect.php" method="POST" class="card mx-auto" style="width: 18rem;">
             <img src="../images/ticket.jpg" class="card-img-top " alt="Kid Ticket Image">
             <div class="card-body">
@@ -38,13 +41,12 @@ if(isset($_POST['ticketBtn'])){
                     <input type="hidden" name="ticketName" value="Kid Ticket">
                     <input type="hidden" name="ticketPrice" value="32">
                     <input type="hidden" name="ticketType" value="child">
-                    <button name = "kidSubmitTicketBtn"class="btn btn-primary" type="submit">Book Ticket</button>
+                    <button name = "ticketBtn"class="btn btn-primary" type="submit">Book Ticket</button>
                     <span class="btn btn-success">£32</span>
                 </div>
             </div>
         </form>
 
-        Adult Ticket Form
         <form action="ticketSelect.php" method="POST" class="card mx-auto" style="width: 18rem;">
             <img src="../images/ticket.jpg" class="card-img-top" alt="Adult Ticket Image">
             <div class="card-body">
@@ -62,13 +64,12 @@ if(isset($_POST['ticketBtn'])){
                     <input type="hidden" name="ticketName" value="Adult Ticket">
                     <input type="hidden" name="ticketPrice" value="53">
                     <input type="hidden" name="ticketType" value="adult">
-                    <button class="btn btn-primary" type="submit">Book Ticket</button>
+                    <button name = "ticketBtn"class="btn btn-primary" type="submit">Book Ticket</button>
                     <span class="btn btn-success">£53</span>
                 </div>
             </div>
-        </form>
+        </form> 
 
-        <!-- Family Ticket Form -->
         <form action="ticketSelect.php" method="POST" class="card mx-auto" style="width: 18rem;">
             <img src="../images/ticket.jpg" class="card-img-top" alt="Family Ticket Image">
             <div class="card-body">
@@ -87,13 +88,12 @@ if(isset($_POST['ticketBtn'])){
                     <input type="hidden" name="ticketName" value="Family Ticket">
                     <input type="hidden" name="ticketPrice" value="75">
                     <input type="hidden" name="ticketType" value="family">
-                    <button class="btn btn-primary" type="submit">Book Ticket</button>
+                    <button name = "ticketBtn"class="btn btn-primary" type="submit">Book Ticket</button>
                     <span class="btn btn-success">£75</span>
                 </div>
             </div>
         </form>
 
- 
         <form action="ticketSelect.php" method="POST" class="card mx-auto" style="width: 18rem;">
             <img src="../images/ticket.jpg" class="card-img-top" alt="Educational Ticket Image">
             <div class="card-body">
@@ -112,12 +112,11 @@ if(isset($_POST['ticketBtn'])){
                     <input type="hidden" name="ticketName" value="Educational Ticket">
                     <input type="hidden" name="ticketPrice" value="200">
                     <input type="hidden" name="ticketType" value="educational">
-                    <button class="btn btn-primary" type="submit">Book Ticket</button>
+                    <button name = "ticketBtn"class="btn btn-primary" type="submit">Book Ticket</button>
                     <span class="btn btn-success">£200</span>
                 </div>
-            </div>
-        </form> 
-
+            </div> 
+        </form>
 
        
     </div>
@@ -175,7 +174,7 @@ FREE parking.
 Price Range: £200 - 12000
 
 
-create an associative array in the constructor, somehting like this 
+create an associative array in the constructor, somehting like this if we do classes for this info
  $this->tickets[
     'kid' => [
         
@@ -190,5 +189,9 @@ create an associative array in the constructor, somehting like this
         
         ],
     
-    ] 
--->
+    ] ,
+
+    adult
+ -->
+
+  

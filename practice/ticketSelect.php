@@ -1,4 +1,6 @@
+
 <?php
+ require_once "navbar.php";  
 
 require "../classes/ticketClass.php";
 $ticket = new ticket();
@@ -14,7 +16,8 @@ $ticket = new ticket();
 // }
 
 if(isset($_POST['basketAddBtn'])){
-    $ticket->addToCart($_POST['ticketType'],$_POST['QuantityBox'],$_POST['specialRequirements'] ?? '',$_POST['dateSelected']);
+    $ticket->addToCart($_POST['ticketType'],$_POST['QauntityBox'],$_POST['specialRequirements'] ?? '',$_POST['date']);
+    // print_r ($_SESSION['cart']);
     header("location:ticketCart.php");
     exit();
 }
@@ -45,7 +48,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 </head>
 <body>
-    <?php require_once "navbar.php";   ?>
 
 
 
@@ -59,20 +61,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <?php
             $dateSelected = $_POST['selectedDate'] ?? null;       
         ?>
-        <form  action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>"method = "POST">
+        <form  action = <?php echo htmlspecialchars($_SERVER['PHP_SELF'])?> method = "POST">
             <h3>Choose a time for your booking:</h3><br>
-            <label for="dateRange1">Date</label>
-            <input type="text" id="date" name="displayDate" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
+            <label for="date">Date</label>
+            <input type="text" id="date" name="date" placeholder="Select Date.." readonly="readonly" min="today" max="today + 10 days" />
             
             <input type='hidden' id='hiddenStartDate' name='selectedDate' value=''>
 
             <button type="button" class="btn btn-light" id="dateRangeClear">Clear</button>
-                <label for ="name">Special Requirments</label>
-                <input type = "text" name = "specialRequirements">
+                <label for ="specialRequirements">Special Requirments</label>
+                <input  id = "specialRequirements"  type = "text" name = "specialRequirements">
 
                 <div class="input-group mb-3">
+                    <label >Quantity</label>
                     <button id="decrement-btn" class="btn btn-outline-secondary" type="button">-</button>
-                    <input name="QauntityBox" id="Quantity" type="text" class="form-control" value="1" aria-label="Enter Amount" readonly>
+                    <input name="QauntityBox" id="Quantity" type="text" class="form-control" value="0" aria-label="Enter Amount" readonly>
                     <button id="increment-btn" class="btn btn-outline-secondary" type="button">+</button>
                 </div>
 
@@ -80,7 +83,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <input type = "hidden" name = "ticketType" value = "<?php echo  htmlspecialchars($selectedTicketType)?>">
                 <input type = "hidden" name = "ticketPrice" value = "<?php echo  htmlspecialchars($selectedTicketPrice)?>">
 
-                <button href = "../practice/ticketCart.php"id = "addToBasketBtn"type = "submit" name = "bastketAddBtn" class = "btn btn-primary"> Add to basket</button>
+                <button type="submit" name="basketAddBtn" id="addToBasketBtn" class="btn btn-primary">Add to basket</button>
         </form>
     </div>
 
