@@ -40,6 +40,8 @@ include_once '..//connection/connection.php';
             $this -> startSession();
             $_SESSION['email'] = $this->email;
             $_SESSION['user_logged_in'] = true;
+
+            $email = $_SESSION['email'];
             // $this->Cookies();
             header("Location:homepage.php"); // Redirect to a success page
     

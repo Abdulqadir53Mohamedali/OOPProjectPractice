@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "..//classes/loginClass.php";
 
 $errorResults = ['errors'=> []];  // array to store error messages

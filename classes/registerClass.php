@@ -45,10 +45,12 @@ class register extends database {
         $errors = [];
         $MinimumNamelength = 2;
         $MinimumPasswordlength = 7;
+        $firstName = $lastName = $email = $passwrd = $confirmPasswrd = ""; // friday every time
+
 
 
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL) || empty($this->email) || $this->emailCheck()) {
-            $errors["email"] = "Invalid email or email already exists";
+            $errors["email"] =  "Invalid email or email already exists";
         }
         // potnetially move email check otuside this 
         if (
@@ -61,7 +63,7 @@ class register extends database {
         }
 
         if ($this->confirmPassword != $this->passwrd || empty($this->confirmPassword)) {
-            $errors["confirmPassword"] = "The passwords do not match.";
+            $errors["confirmPassword"] = "The passwords do not match."; // friday
         }
         if (strlen($this->firstName) < $MinimumNamelength  || !ctype_alpha($this->firstName) || empty(($this->firstName))) {
             $errors["firstName"] = "Invalid name entered ";
@@ -72,6 +74,12 @@ class register extends database {
 
         if (!isset($this->TC)) {
             $errors["TC"] = "*required*";
+        }
+        // could also use array_filter to check for empty errors array
+        
+        if(empty($errors)){
+            
+            $this->registration();
         }
 
 
@@ -93,6 +101,7 @@ class register extends database {
         echo isset($_POST[$type]) ? $_POST[$type] : '';
     }
 }
+
 
 
 ?>

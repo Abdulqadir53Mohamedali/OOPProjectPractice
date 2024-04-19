@@ -1,5 +1,5 @@
 <?php 
-    require "navbar.php" ;
+    session_start();
     require "../classes/ticketClass.php";
     $ticket = new ticket(); 
 
@@ -32,17 +32,18 @@ if (isset($_POST['removeItem'])) {
 
 </head>
 <body>
-
+<?php require "navbar.php"?>
     
-    <div class =  "container border" stlye = "margin-top:100px;">
+    <div class =  "container border mt-5" stlye = "">
         <?php
+        // potentially revserse and do in html
         if (!empty($_SESSION['cart'])) {
             echo "<table class='table'>";
             echo "<tr><th>Type</th><th>Total Price</th><th>Quantity</th><th>Special Requirements</th><th>Date</th><th>Actions</th></tr>";
             foreach ($_SESSION['cart'] as $item) {
                 echo "<tr>";
-                echo "<td>{$item['type']}</td>"; // Changed from ticketType to type
-                echo "<td>{$item['totalPrice']}</td>"; // Changed from ticketPrice to totalPrice
+                echo "<td>{$item['type']}</td>"; 
+                echo "<td>{$item['totalPrice']}</td>"; 
                 echo "<td>{$item['quantity']}</td>";
                 echo "<td>{$item['specialRequirements']}</td>";
                 echo "<td>{$item['date']}</td>";
@@ -50,6 +51,7 @@ if (isset($_POST['removeItem'])) {
                     <form method='POST' action='ticketCart.php'>
                         <input type='hidden' name='ticketType' value='{$item['type']}'>
                         <input type='hidden' name='specialRequirements' value='{$item['specialRequirements']}'>
+                        <input type='hidden' name='date' value='{$item['date']}'>
                         <button type='submit' name='removeItem' class='btn btn-danger'>Remove</button>
                     </form>
                 </td>";
@@ -57,16 +59,22 @@ if (isset($_POST['removeItem'])) {
             }
             echo "</table>";
         } else {
-            echo "Your cart is empty.";
+            echo "<div class ='text-center'>Your cart is empty.</div>";
         }
         
         ?>
-    </div>
-    <button name = "confirmBookingBtn">Confirm Bookings</button>
 
-    <form method = "POST">
+<form method = "POST">
+    <div class = "text-center">
+    <?php if (!empty($_SESSION['cart'])) { ?>
+        <button class = "btn btn-primary"name = "confirmBookingBtn">Confirm Bookings</button>
+    <?php } ?>
         <button name = "addTicketBtn" type = "submit"class = "btn btn-primary">Add tickets</button>
-    </form>
+    </div>
+
+</form>
+    </div>
+
   
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -1,8 +1,15 @@
 
-<?php session_start()?>
 
-
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F7E5C8;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <header>
+ <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F7E5C8;">
   <div class="container-fluid">
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +62,11 @@
     </div>
   </div>
 </nav>
+ </header> 
+
+</body>
+</html>
+
 
 
 

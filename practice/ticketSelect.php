@@ -1,6 +1,8 @@
 
 <?php
- require_once "navbar.php";  
+session_start();
+
+
 
 require "../classes/ticketClass.php";
 $ticket = new ticket();
@@ -48,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 </head>
 <body>
-
+<?php require_once "navbar.php";  ?>
 
 
     <!-- Ticket Form -->
@@ -86,15 +88,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <button type="submit" name="basketAddBtn" id="addToBasketBtn" class="btn btn-primary">Add to basket</button>
         </form>
     </div>
-
-
-
-
-
-
-
-
-
 
 
     <!-- To use plugins the one below must be included -->

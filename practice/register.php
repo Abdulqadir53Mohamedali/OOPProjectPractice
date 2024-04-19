@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once "../classes/registerClass.php";
 
 $errorResults = ['errors'=> []];  // array to store error messages
@@ -30,23 +32,10 @@ if(isset($_POST['submitBtn'])){
     $formValidation = $register;
 }
 ?>
-<?php
 
-    $registerone = new register($_POST['email'] ?? '',$_POST['password'] ?? '',$_POST['confirmPassword'] ?? '',$_POST['lastName']?? '',$_POST['firstName'] ?? '');
-
-    if(isset($_POST['submitBtn'])){
-        $formValidation = $registerone->validation();
-        if (empty($errors)) {
-            $registerone->registration();
-            header("location:login.php");
-            exit();
-
-        }
-
-    }
-
-?>
-
+<!-- starPower2154 
+    abstar.tm@gmail.com
+-->
 
 <!DOCTYPE html>
 <html lang="en">

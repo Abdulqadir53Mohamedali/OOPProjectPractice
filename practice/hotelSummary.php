@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 require "navbarhotelsummary.php";
 
 require_once("..//classes/hotelClass.php");
