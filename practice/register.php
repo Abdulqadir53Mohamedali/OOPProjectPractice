@@ -6,36 +6,18 @@ include_once "../classes/registerClass.php";
 $errorResults = ['errors'=> []];  // array to store error messages
 $validationResult = null;
 
-
-// potneitla reaosns ofr form erros 
-
-// before incldue do 
-    // error_reporting(E_ALL) and ini_set('dsiplay_errors',1)
-
-// do var_dump($_POST) before button isset
-//  not putitng exit after header stuff 
-// not making sure the for  attribute in label is identicla to id and name in input
-// $POST = array() // should clear the psot aray when before submission // clear only if corretc
-// potentially change the empty erros stuff 
-// chekc method and action stuff 
-// check post inputs
-// potentially get rid of the vlaue stuff for password and confirmpassowrd 
-    // nto good idea ot keep tetxt there 
 if(isset($_POST['submitBtn'])){
     $TC = isset($_POST['TC']) ? $_POST['TC'] : '';
     $register = new register($_POST['email'],$_POST['password'],$_POST['confirmPassword'],$_POST['lastName'],$_POST['firstName'],$TC);
     $formValidation = $register;    
     $validationResult = $formValidation->validation();
-    // do var dump here
+ 
 } else{
     $register = new register('', '', '', '', '', '');
     $formValidation = $register;
 }
 ?>
 
-<!-- starPower2154 
-    abstar.tm@gmail.com
--->
 
 <!DOCTYPE html>
 <html lang="en">

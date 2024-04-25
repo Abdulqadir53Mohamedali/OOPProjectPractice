@@ -111,6 +111,9 @@ if(isset($_POST['roomBtn'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- To use plugins the one below must be included -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/rangePlugin.js"></script>
+    
+    <!-- ENSURE YOU SPELL THE URL WORDS CORRECTLY, range not ran sicne on soem places it says that -->
+
     <!-- Default flatpickr js link needed to work/ use the API  -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/scripts/index.js" ></script>

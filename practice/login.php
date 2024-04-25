@@ -14,7 +14,10 @@ if(isset($_POST['submitBtn'])){
     $formValidation = $login;
 }
 ?>
+<!-- 
+    Ensure that you remove value form password completely
 
+ -->
 
 
 <!DOCTYPE html>

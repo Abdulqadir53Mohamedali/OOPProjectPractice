@@ -80,11 +80,43 @@ class hotel extends database
             GROUP BY r.roomType
             ORDER BY r.roomID ASC
         ";
+        //MIN(CASE WHEN h.status != 'active' OR h.status IS NULL THEN r.roomID END) AS nextAvailableRoomID , potential better wya to hdandle active rrooms fetch
+
         
         $stmtRooms = $this->connect()->prepare($sql_query);
         $stmtRooms->execute([$floorNumber]);
         return $stmtRooms->fetchAll(PDO::FETCH_ASSOC);
+        // print_r($stmtRooms) error check
+        // dp the below afetr 
+
+        //$stmtRooms->execute([$floorNumber]);
+        //$errorInfo = $stmtRooms->errorInfo();
+        //if ($errorInfo[0] != '00000') {
+          //  echo "<pre>Error: " . $errorInfo[2] . "</pre>";
+        //}
+        // will allow to view SQL query errors more clearly
     }
+
+    /**
+     * The query fetches data based on the floor parameter and includes several fields like roomType, RoomDescription, price, floor, and roomImage. 
+     * It also computes the nextAvailableRoomID for each room type that doesn't have an active booking.
+     *
+     *Data Usage in PHP:
+     *After executing the query and fetching the data into the $rooms array, your PHP script iterates over this array to determine availability and possibly other details for display. 
+     *The roomType key is accessed directly from the $rooms array to display details about each room and for logic checks:
+     *         
+     *first one rooms ,then  3 are room then rest rooms
+     * 
+     * Error Handling:
+     *If you are encountering errors like "undefined index" for roomType, it could mean:
+     * The SQL query might not be returning the roomType field due to an issue in the database query, such as a misspelled column name or incorrect table relationships.
+     * The database itself might not contain the expected data or schema in your exam environment.
+     * To troubleshoot and ensure the correct operation, you can:
+
+     * Verify the database schema and ensure the rooms table contains a roomType column.
+     * Add error checking in your PHP code to handle cases where the expected data might not be present.
+     * Log or output the results of your SQL query directly before processing them to see what data you're actually receiving from the database
+     */
 
 
     public function  cardDeatilsValidation($cardN,$Ncard,$exp, $cvv){
@@ -108,7 +140,8 @@ class hotel extends database
         }
     }
 
-
+    // use UPDATE instead of SELECT when using SET keyword in sql to chnage exisiting data
+    // tested earl date function in other code is corretc 
 
 }
 
