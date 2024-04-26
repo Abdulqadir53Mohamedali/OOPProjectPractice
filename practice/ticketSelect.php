@@ -1,5 +1,5 @@
 <?php
-
+//  no cart , no summary ,no card pay
 require "./ticketClass.php";
 // require "./ticketVaidation.php";
 $ticket = new ticket();
