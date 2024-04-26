@@ -164,3 +164,20 @@ class hotel extends database
 // EXTRAS
     // If we have time then add a filter system allowing user to selects dates and then room types
     // if we have more time then add filtering via price
+    // $stmtRooms = $this->connect()->prepare($sql_query);
+    // $stmtRooms->execute([$floorNumber]);
+    // $rooms = $stmtRooms->fetchAll(PDO::FETCH_ASSOC);
+
+    // // Check for availability and get the earliest available date if needed
+    // foreach ($rooms as $key => $room) {
+    //     if ($room['nextAvailableRoomID'] === null) {
+    //         // No available room ID, meaning all are booked; fetch earliest date.
+    //         $earliestAvailableDate = $this->getEarliestAvailableDate($room['roomType'], $floorNumber);
+    //         $rooms[$key]['isBookable'] = false;
+    //         $rooms[$key]['earliestAvailableDate'] = $earliestAvailableDate;
+    //     } else {
+    //         // Available room ID exists.
+    //         $rooms[$key]['isBookable'] = true;
+    //         $rooms[$key]['earliestAvailableDate'] = null;
+    //     }
+    // }

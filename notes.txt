@@ -1,0 +1,73 @@
+GENERAL INFO
+
+Scope: 
+
+ 
+
+The website will serve as the digital front for "ZooSafari," a local zoo and safari park, designed to enhance visitor engagement and streamline the experience.
+It aims to provide detailed information about the park's diverse animal species, attractions, and accommodation options, and will facilitate online ticket and hotel booking. Targeting animal lovers, 
+families, school groups, and tourists, the website offers a user-friendly platform to explore the park's offerings, plan visits, manage personal accounts, and engage with interactive educational content about wildlife and conservation efforts. 
+Additionally, the website will include accessibility information and a loyalty program to reward frequent visitors, further enriching the visitor experience and fostering community engagement. 
+
+
+Environment Setup: 
+
+The website has been built using a responsive design/layout to ensure useability across various devices and screen sizes. It consists of a front-end user interface for customers and a back-end management system for order processing and content management. 
+Front-end: HTML, CSS (with Bootstrap for responsive design), and JavaScript 
+Back-end: PHP, MYSQL for server-side logic  
+
+Dependencies: 
+Requires Visual studio Code and XAMPP with Apache and MySQL installed 
+
+Extra Information: 
+May be required to zoom in on images (	In this documentation) 
+
+
+
+HOTEL BOOKIGN 
+
+
+Purpose:
+
+The hotel reservation interface aims to provide users with a seamless booking experience, allowing them to select dates, choose from various room types, 
+and receive immediate confirmation of their booking. It is designed to increase user engagement and streamline the reservation process.
+
+Layout and Visual Elements:
+Date Selection: Users are presented with a calendar interface where they can pick check-in and check-out dates for their stay.
+Room Selection: A dynamic display showcases available rooms, categorized by type, with an option to view more details.
+Booking Summary: A summary section provides users with a review of their booking details before final confirmation.
+Availability Indicator: In cases where the desired room type is not available on selected dates, the interface will indicate the next available date.
+
+Functionality:
+Dynamic Date Picker: Users can choose two dates, the system should check availability in real-time and respond accordingly.
+Room Availability Check: If no room is available for the selected dates, the system is intended to suggest alternative dates for the same room type on the selected floor.
+
+Current State and Challenges:
+Currently, the system only shows the 'Standard Room' option due to unforeseen technical issues.
+The date selection component is not functioning as expected, and users are unable to book even the displayed 'Standard Room'.
+The intended feature to suggest the next available date for full bookings is not operational.
+
+Planned Features and Roadmap:
+
+Date Selection Enhancement: The immediate priority is to fix the date selection tool for a fully functional date range picker.
+Room Selection Expansion: Debug and expand the room selection functionality to display all room types and enable booking.
+Booking Summary and Confirmation: Implement the summary view to confirm the booking details and provide users with a clear next step for reservation completion.
+Availability Adjustments: Introduce a feature to automatically suggest the nearest available dates with a functional 'Book Room' button when the initial choice is not available.
+
+TICKET BOOKIGN 
+
+REGISTER 
+
+LOGIN 
+
+ABOUT US 
+
+HOMEPAGE 
+
+SETTINGS
+
+DISCOVER PAGES
+
+
+
+
