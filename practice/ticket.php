@@ -173,22 +173,3 @@ Save 10% when you book online at least a day in advance.
 The price for the on-site hotel will be reduced if bought in person with this ticket.
 FREE parking.
 Price Range: £200 - 12000
-
-
-create an associative array in the constructor, somehting like this 
- $this->tickets[
-    'kid' => [ change to child
-        
-        'title' => 'KID TICKET'
-        ''description => [
-            'line',
-            'line',
-            
-            ],
-            type,price,image
-        
-        
-        ],
-    
-    ] 
--->

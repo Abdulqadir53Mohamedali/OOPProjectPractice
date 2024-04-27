@@ -15,111 +15,73 @@ $email = $_SESSION['email'] ?? null;
 $userId = $hotel->userIdFetch($email);
 
 
-if(isset($_POST["roomID"])){
-    $chosenRoom = $hotel->chosenRoom($_POST["roomID"]);
-    $startDate = $_POST['startDate'] ;
-    $endDate = $_POST['endDate'] ;
-    $roomID = $_POST["roomID"];
+$userId = $hotelBooking->fetchUserId($userEmail);
+
+$roomDetails = null;
+if (isset($_POST["selectRoom"])) {
+    $roomDetails = $hotelBooking->getRoomDetails($_POST["roomID"]);
 }
-if (isset($_POST["ConfirmPaymentBtn"])) {
-    var_dump($_POST['roomId'], $userId, $_POST['startDate'], $_POST['endDate']);
+
+if (isset($_POST["processPayment"])) {
+    $bookingResult = $hotelBooking->processBooking(
+        $_POST['roomId'] ?? null,
+        $userId,
+        $_POST['startDate'] ?? null,
+        $_POST['endDate'] ?? null
+    );
     
-    $hotel->sendBookingInfo($_POST['roomId'] ?? '', $_POST['userId'] ?? '', $_POST['startDate'] ?? '', $_POST['endDate'] ?? '');
-    header("Location:hotel.php");
+    if ($bookingResult) {
+        header("Location: confirmation.php");
+        exit;
+    }
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <title>Complete Your Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-
-
-    <h2 name="roomName" class="text-center">Hotel Room</h2>
-    <hr class="border">
-
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
-        <div class="container">
-            <h2>Payment</h2>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title"><u>Booking Information</u></h5>
-                            <p class="card-text">Room Type <br> <?php echo $chosenRoom['roomType']  ?></p>
-                            <p class="card-text">Floor <br> <?php echo $chosenRoom['floor'] ?></p>
-                            <p class="card-text">Booking Dates <br> <?php echo $startDate ?> - <?php echo $endDate ?></p>
-                            <p class="card-text"> Booking Time </p>
-                            <h5 class="card-title"> <u>Booking Cost</u></h5>
-                            <p>Price: <br> £<?php echo  $chosenRoom['price'] ?></p>
-                            <input name="userId" type="hidden" value="<?php echo $userId ?>">
-                            <input name="roomId" type="hidden" value="<?php echo $roomID ?>">
-                            <input name="startDate" type="hidden" value="<?php echo $startDate; ?>">
-                            <input name="endDate" type="hidden" value="<?php echo $endDate; ?>">
-                        </div>
+    <main class="container my-5">
+        <header>
+            <h2 class="text-center">Confirm Your Hotel Booking</h2>
+            <hr>
+        </header>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <section>
+                <div class="row">
+                    <div class="col-md-8">
+                        <article class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title">Booking Details</h3>
+                                <p>Type: <?php echo htmlspecialchars($roomDetails['type']); ?></p>
+                                <p>Floor: <?php echo htmlspecialchars($roomDetails['floor']); ?></p>
+                                <p>Dates: <?php echo htmlspecialchars($startDate) . ' to ' . htmlspecialchars($endDate); ?></p>
+                                <p>Rate: £<?php echo htmlspecialchars($roomDetails['rate']); ?></p>
+                                <input type="hidden" name="roomId" value="<?php echo htmlspecialchars($roomId); ?>">
+                                <input type="hidden" name="startDate" value="<?php echo htmlspecialchars($startDate); ?>">
+                                <input type="hidden" name="endDate" value="<?php echo htmlspecialchars($endDate); ?>">
+                            </div>
+                        </article>
+                        <!-- Payment Information and PayPal Option Here -->
                     </div>
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">1. Credit Card</h5>
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput" class="form-label">Card number</label>
-                                <input  name = "CardNumber" type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. 1234567891234567">
+                    <div class="col-md-4">
+                        <article class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Summary</h3>
+                                <!-- Order Summary Information Here -->
+                                <button type="submit" name="processPayment" class="btn btn-success">Make Payment</button>
                             </div>
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput2" class="form-label">Name on card</label>
-                                <input name = "cardholderName" type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g. Silvers Reileigh">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput" class="form-label">Expiry date</label>
-                                <input name = "ep" type="text" class="form-control" id="formGroupExampleInput" placeholder="MM/YY">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput2" class="form-label">CVV code</label>
-                                <input  name = "cvv"type="text" class="form-control" id="formGroupExampleInput2" placeholder="e.g.961">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">2. Paypal</h5>
-                            <!-- Paypal icon -->
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Summary</h5>
-                            <p class="card-text">Subtotal</p>
-                            <p class="card-text">Discount</p>
-                            <hr>
-                            <p class="card-text">Total : <?php echo $chosenRoom['price']  ?></p>
-                            <button type="submit" name="ConfirmPaymentBtn" class="btn btn-primary">Confirm Payment</button>
-
-                        </div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </div>
-    </form>
-
-
-
-
-    
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+            </section>
+        </form>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,73 +1,67 @@
-GENERAL INFO
-
-Scope: 
-
- 
-
-The website will serve as the digital front for "ZooSafari," a local zoo and safari park, designed to enhance visitor engagement and streamline the experience.
-It aims to provide detailed information about the park's diverse animal species, attractions, and accommodation options, and will facilitate online ticket and hotel booking. Targeting animal lovers, 
-families, school groups, and tourists, the website offers a user-friendly platform to explore the park's offerings, plan visits, manage personal accounts, and engage with interactive educational content about wildlife and conservation efforts. 
-Additionally, the website will include accessibility information and a loyalty program to reward frequent visitors, further enriching the visitor experience and fostering community engagement. 
-
-
-Environment Setup: 
-
-The website has been built using a responsive design/layout to ensure useability across various devices and screen sizes. It consists of a front-end user interface for customers and a back-end management system for order processing and content management. 
-Front-end: HTML, CSS (with Bootstrap for responsive design), and JavaScript 
-Back-end: PHP, MYSQL for server-side logic  
-
-Dependencies: 
-Requires Visual studio Code and XAMPP with Apache and MySQL installed 
-
-Extra Information: 
-May be required to zoom in on images (	In this documentation) 
+Example documentation starter, obtained form onlien soruces so do nto copy otherwise plagrism 
+use as a example
 
 
 
-HOTEL BOOKIGN 
+Overview
 
+The digital presence of "Wild Wonders Park," a zoological and safari haven, is set to captivate visitors and streamline their experience. This web portal is crafted to provide exhaustive insights into the park's varied habitats, exotic residents, entertainment, and lodging facilities. It beckons wildlife enthusiasts, kin groups, educational tours, and explorers with an intuitive online passage for delving into the park's offerings, orchestrating excursions, managing profiles, and interacting with immersive instructive content on fauna and habitat preservation. Supplementary features like accessibility details and a reward mechanism for park regulars are integrated to augment the guest journey and nurture a connection with the community.
 
-Purpose:
+Technical Blueprint
 
-The hotel reservation interface aims to provide users with a seamless booking experience, allowing them to select dates, choose from various room types, 
-and receive immediate confirmation of their booking. It is designed to increase user engagement and streamline the reservation process.
+A versatile framework underpins the site to ensure optimal functionality across a multitude of gadgets and viewing dimensions. The architecture encompasses a customer-facing interface and an administrative backend for operational control and content updates.
+Frontline Interface: HTML, CSS (Bootstrap-enabled adaptive design), JavaScript
+Backend Mechanics: PHP, MYSQL for backend processes
 
-Layout and Visual Elements:
-Date Selection: Users are presented with a calendar interface where they can pick check-in and check-out dates for their stay.
-Room Selection: A dynamic display showcases available rooms, categorized by type, with an option to view more details.
-Booking Summary: A summary section provides users with a review of their booking details before final confirmation.
-Availability Indicator: In cases where the desired room type is not available on selected dates, the interface will indicate the next available date.
+Prerequisites:
+Development tools such as Visual Studio Code and XAMPP with functional Apache and MySQL modules are necessary.
 
-Functionality:
-Dynamic Date Picker: Users can choose two dates, the system should check availability in real-time and respond accordingly.
-Room Availability Check: If no room is available for the selected dates, the system is intended to suggest alternative dates for the same room type on the selected floor.
+Additional Notes:
+Certain documents herein may necessitate image magnification for finer details.
 
-Current State and Challenges:
-Currently, the system only shows the 'Standard Room' option due to unforeseen technical issues.
-The date selection component is not functioning as expected, and users are unable to book even the displayed 'Standard Room'.
-The intended feature to suggest the next available date for full bookings is not operational.
+Lodging Interface Overview
 
-Planned Features and Roadmap:
+The goal of the lodging interface is to offer a frictionless reservation flow that enables patrons to earmark dates, select from an array of accommodations, and secure bookings instantaneously, thereby bolstering user involvement and simplifying the booking chain.
 
-Date Selection Enhancement: The immediate priority is to fix the date selection tool for a fully functional date range picker.
-Room Selection Expansion: Debug and expand the room selection functionality to display all room types and enable booking.
-Booking Summary and Confirmation: Implement the summary view to confirm the booking details and provide users with a clear next step for reservation completion.
-Availability Adjustments: Introduce a feature to automatically suggest the nearest available dates with a functional 'Book Room' button when the initial choice is not available.
+Design and Aesthetics:
+Chronological Selector: A graphical picker allows for the designation of arrival and departure schedules.
+Accommodation Showcase: A lively exhibition presents the lodgings on offer, each with its unique flair and specifics.
+Reservation Recap: This segment collates and displays booking specifics for user verification pre-confirmation.
+Availability Beacon: Should the sought-after accommodation be booked out, this system flags subsequent available slots.
 
-TICKET BOOKIGN 
+Operational Mechanics:
+Adaptive Date Selector: This feature provides real-time date availability checks.
+Lodging Availability Scanner: The system suggests alternate dates for booked-out accommodation preferences.
 
-REGISTER 
+Present State and Obstacles:
+Presently, only 'Standard Room' bookings are viewable due to unforeseen backend errors. The date selection utility is non-operational, blocking even the available room reservations. The functionality to propose proximate available dates is yet to be active.
 
-LOGIN 
+Developmental Roadmap and Prospective Additions:
 
-ABOUT US 
+Date Tool Refinement: Rectifying the date picker for a complete and functional interface is the immediate focus.
+Room Selection Development: Troubleshoot and enrich the room selection module to feature all accommodation types for reservations.
+Confirmation Synopsis: Establish a comprehensive overview of booking specifics to guide users through the reservation finalization.
+Next Available Suggestion: Introduce an auto-suggestion mechanism for proposing the closest available dates with an operative booking option in instances of non-availability.
 
-HOMEPAGE 
+Further Sections
 
-SETTINGS
+Admission Interface:
+Facilitating the online procurement of park entry passes.
 
-DISCOVER PAGES
+Registration System:
+Enabling new users to create personal accounts for a tailored experience.
 
+Login Portal:
+Secure access point for returning users.
 
+Our Story:
+An engaging narrative of the park's inception, mission, and values.
 
+Welcome Dashboard:
+The primary landing page highlighting key attractions and updates.
 
+Preference Adjustments:
+A user-centric area for profile customization and settings.
+
+Exploration Pages:
+Dedicated sections for detailed exploration of various park zones and features.
